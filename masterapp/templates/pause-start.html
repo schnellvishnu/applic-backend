@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">  
+    <head>  
+        <meta charset="UTF-8">  
+        <title>Index</title>  
+        {% load static %} 
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+        <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+        crossorigin="anonymous"
+        />  
+    </head> 
+    <br/> 
+    <body style="background-color:#848482"> 
+        
+        <div class="alert alert-primary" role="alert" style="width:30%; margin-left:600px" >
+            Click To The Prepare button After Preparing Click To Start 
+           </div> 
+    <form method="POST" class="post-form" action="{{qs.id}}">  
+        {% csrf_token %}
+        <br/> <br/> <br/>
+        <div class="container text-center" style="border: 4px solid rgb(51, 74, 72); background-color:#d3d3d3">
+           
+            <div class="row">
+               
+                <div classname="col-12">
+                    <h1><font face="times new roman" >Printing Details</font></h1>
+                    <br></br>
+                </div>
+               
+            </div>
+            <h4>SerialNumber Count : {{ sc }}</h4>
+            {% if sc <= 1000 %}
+            <div class="alert alert-warning" role="alert">
+                Serialnumbers Becomes low Please Pause The Printer and Download More Numbers  
+              </div>
+              {% elif sc <= 100 %}  
+              <div class="alert alert-danger" role="alert">
+                Serialnumbers Becomes low Please Pause The Printer and Download More Numbers
+              </div>
+              {% else %}
+              <div>
+                
+              </div>
+               
+        {% endif %}  
+            <br/> <br/> <br/>
+            <div class="row" style="margin-left:-110px">
+                <br></br>
+                <div class="col-3">  
+                  <h5 style="margin-left:180px">Lot</h5>
+                  <br/> <br/><br/>
+                  <h5 style=" margin-left:190px" >Serialno</h5>  
+                  <br/> <br/><br/>
+                  <h5 style=" margin-left:200px" >Expiry Date</h5>  
+                </div>
+                <div class="col-3">
+                  <input type="text" style="width:80%;height:50px"   name="eid" id="id_eid" required maxlength="50" value="{{ qs.lot }}"/> 
+                  <br/><br/><br/>
+                  <input type="text" style="width:80%;height:50px"  name="ename" id="id_ename" required maxlength="100" value="{{ qs.numbers }}" />
+                  <br/><br/><br/>
+                  <input type="text"  style="width:80%;height:50px" name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.expiration_date}}" />   
+                </div>
+                <br></br>
+                <div class="col-3">
+                  <h5 style="margin-left:-60px">Gtin</h5> 
+                  <br/><br/><br/>
+                  <h5 style="margin-left:100px" >Processorder Number:</h5>   
+                  <br/><br/><br/>
+                  <h5 style="margin-left:-60px">Type</h5>   
+                </div>
+                <div class="col-3">
+                  <input type="text" style="width:80%;height:50px"  name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.gtin}}" />  
+                  <br/><br/><br/>
+                  <input type="text" style="width:80%;height:50px"   name="eemail" id="id_eemail" required maxlength="254" value="{{ qs.processordernumber }}" /> 
+                  <br/><br/><br/>
+                  <input type="text" style="width:80%;height:50px"   name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.type }}" /> 
+                
+                </div>
+              </div> 
+              <br></br>
+            <div class="row">
+                <div classname="col-12">
+                    {% if pd == 1 %}
+                        <button type="submit" class="btn btn-success" >Start</button> 
+                    {% else %}
+                        <button type="submit" class="btn btn-warning" >Prepare Printer And Scanner</button> 
+                    {% endif %}  
+                    <br></br>
+                </div>
+                
+            </div> 
+            <a href="{%url 'emp-editjob' qs.id%}" class="btn btn-info" style= "color:red; margin-left:1040px" >Navigate To Batch Details Page</a>   
+        </form>  
+    </body>  
+</html>  

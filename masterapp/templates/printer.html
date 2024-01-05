@@ -1,0 +1,52 @@
+
+{%extends 'base.html'%}
+{%block body_block%}
+<!DOCTYPE html>  
+<html lang="en">  
+    <head>  
+        <meta charset="UTF-8">  
+        <title>Printer Records</title>  
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+    </head>  
+    <body>  
+        <table class="table table-striped table-bordered table-sm">  
+            <thead class="thead-dark">  
+                <tr>  
+                    <th>processordernumber</th>
+                    <th>expiration_date</th>
+                    <th> lot</th>
+                    <th>gtin</th>
+                    <th>status</th>
+                    <th>view</th> 
+                </tr>  
+            </thead>  
+            <tbody>  
+                {%for printer in printer%}
+                <tr>  
+                    <td>{{printer.processordernumber}}</td>
+                    <td>{{printer.expiration_date}}</td>
+                    <td>{{printer.lot}}</td>
+                    <td>{{printer.gtin}}</td>
+                    <td>{{printer.status}}</td> 
+                    <td> 
+                        <a href="view/{{ printer.id}}" class="btn btn-outline-success">View</span></a>  
+                    </td>  
+                </tr>  
+                {% endfor %}  
+            </tbody>  
+        </table>  
+    </body>  
+</html>  
+{%endblock%}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+{%block body_block%}
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-10">
+        <table class="table">
+            <tr>
+                <th>id</th>
+                <th>Gtin</th>
+                <th>Lot</th>
+                <th>Expire Date</th>
+                <th>Type</th>
+                <th>Action</th>
+            </tr>
+            {%for job in demos%}
+            <tr>
+                <td>{{job.id}}</td>
+                <td>{{job.gtin}}</td>
+                <td>{{job.lot}}</td>
+                <td>{{job.expiration_date}}</td>
+                <td>{{job.type}}</td>
+                <td>
+                    <a href="{%url 'emp-editjob' job.id%}"class="btn btn-outline-success">Edit</a>
+                    <a href="{%url 'empstop-editjob' job.id%}"class="btn btn-outline-success">stop</a>
+                </td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    <div class="col-4"></div>
+</div>
+{%endblock%}

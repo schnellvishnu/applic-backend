@@ -1,0 +1,81 @@
+{%extends 'base.html'%}
+{%block body_block%}
+<!DOCTYPE html>  
+<html lang="en">  
+  <head>  
+    <meta charset="UTF-8">  
+    <title>Printer</title>  
+    {% load static %} 
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+  </head>  
+  <body>  
+    <form method="POST" class="post-form"  action="/update/{{printerdata.id}}/">  
+      {% csrf_token %}  
+      <div class="container">  
+        <br>  
+        <div class="form-group row">  
+          <label class="col-sm-1 col-form-label"></label>  
+          <div class="col-sm-4">  
+            <h3>Printer Details</h3>  
+          </div>  
+        </div>  
+        <div class="form-group row">  
+          <label class="col-sm-2 col-form-label">Gtin:</label>  
+          <div class="col-sm-4">  
+            <input type="text" name="eid" id="id_eid" required maxlength="20" value="{{ printerdata.gtin }}"/>  
+          </div>  
+        </div>  
+        <div class="form-group row">  
+          <label class="col-sm-2 col-form-label">Productionorder</label>  
+          <div class="col-sm-4">  
+            <input type="text" name="ename" id="id_ename" required maxlength="100" value="{{ printerdata.processordernumber }}" />  
+          </div>  
+        </div>  
+        <div class="form-group row">  
+          <label class="col-sm-2 col-form-label">Expire</label>  
+          <div class="col-sm-4">  
+            <input type="text" name="eemail" id="id_eemail" required maxlength="254" value="{{ printerdata.expiration_date }}" />  
+          </div>  
+        </div>  
+        <div class="form-group row">  
+          <label class="col-sm-2 col-form-label">Numbers</label>  
+          <div class="col-sm-4">  
+            <input type="text" name="econtact" id="id_econtact" required maxlength="15" value="{{ printerdata.numbers }}" />  
+          </div>  
+        </div>  
+
+        <div class="form-group row">  
+          <label class="col-sm-2 col-form-label">Lot</label>  
+          <div class="col-sm-4">  
+            <input type="text" name="econtact" id="id_econtact" required maxlength="15" value="{{ printerdata.lot }}" />  
+          </div>  
+        </div>
+        <div class="form-group row">  
+          <label class="col-sm-2 col-form-label">Type</label>  
+          <div class="col-sm-4">  
+            <input type="text" name="econtact" id="id_econtact" required maxlength="15" value="{{ printerdata.type }}" />  
+          </div>  
+        </div>
+        <div class="form-group row">  
+          <label class="col-sm-2 col-form-label">Hrf</label>  
+          <div class="col-sm-4">  
+            <input type="text" name="econtact" id="id_econtact" required maxlength="15" value="{{ printerdata.hrf }}" />  
+          </div>  
+        </div>
+        <div class="form-group row">  
+          <label class="col-sm-2 col-form-label">printerstopresponse</label>  
+          <div class="col-sm-4">  
+            <input type="text" name="econtact" id="id_econtact" required maxlength="15" value="{{ printerdata.start_pause_btnresponse }}" />  
+          </div>  
+        </div>
+        <div class="form-group row">  
+          <label class="col-sm-1 col-form-label"></label>  
+          <div class="col-sm-4">  
+            <button type="submit" class="btn btn-success">Update</button>  
+          </div>  
+        </div>  
+      </div>  
+    </form>  
+  </body>  
+</html>  
+{%endblock%}

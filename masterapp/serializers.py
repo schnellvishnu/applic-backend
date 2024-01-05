@@ -1,4 +1,4 @@
-from masterapp.models import PrinterdataTable,ProductionOrder,ScannerTable,ShipPO,Customers,Locations
+from masterapp.models import PrinterdataTable,ProductionOrder,ScannerTable,ShipPO,Customers,Locations,ReworkTable
 from rest_framework import serializers
 
 class ProductionOrderSerializer(serializers.ModelSerializer):
@@ -47,4 +47,8 @@ class LoopStopSerializer(serializers.ModelSerializer):
 class ScannerSerializer(serializers.ModelSerializer):
     class Meta:
         model=ScannerTable
-        fields=["id","grade","gtin"]          
+        fields=["id","grade","gtin","status"]        
+class ReworkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=ReworkTable
+        fields=["id","gtin","slnonumber","oldstatus","newstatus"]      

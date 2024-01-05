@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+{%block body_block%}
+<!DOCTYPE html>  
+<html lang="en">  
+  <head>  
+    <meta charset="UTF-8">  
+    <title>Printer</title>  
+      {% load static %} 
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+  </head>  
+  <body>  
+    <form method="POST" class="post-form" >  
+      {% csrf_token %}  
+      <div class="container">  
+        <br>  
+        <div class="form-group row">  
+          <label class="col-sm-1 col-form-label"></label>  
+          <div class="col-sm-4">  
+            <h3>Printer Details</h3>  
+          </div>  
+        </div>  
+      
+        <div class="form-group row">  
+          <label class="col-sm-2 col-form-label">PrinterStopResponse</label>  
+          <div class="col-sm-4">  
+            <input type="text" name="printerstop" id="id_econtact" required maxlength="15" value="{{ printerstopdata }}" />  
+          </div>  
+        </div>
+        <div class="form-group row">  
+          <label class="col-sm-1 col-form-label"></label>  
+          <div class="col-sm-4">  
+            <button type="submit" class="btn btn-success">Update</button>  
+          </div>  
+        </div>  
+      </div>  
+    </form>  
+  </body>  
+</html>  
+{%endblock%}

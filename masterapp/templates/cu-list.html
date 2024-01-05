@@ -1,0 +1,66 @@
+{%block body_block%}
+<head>  
+    <meta charset="UTF-8">  
+    <title>Index</title>  
+    {% load static %} 
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />  
+  </head> 
+  
+  <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="white" >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" style="color:white">Track And Trace</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <br/>
+  
+  <table class="table table-dark" style="height:400px">
+
+    <thead>
+      <tr>
+        <tr>
+            <th>id</th>
+            <th>Gtin</th>
+            <th>Lot</th>
+            <th>Expire Date</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+      </tr>
+    </thead>
+    {%for job in jobs%}
+    <tbody>
+        <tr>
+            <td>{{job.id}}</td>
+            <td>{{job.gtin}}</td>
+            <td>{{job.lot}}</td>
+            <td>{{job.expiration_date}}</td>
+            <td>{{job.type}}</td>
+            <td>{{job.status}}</td>
+            <td>
+                <a href="{%url 'emp-editjob' job.id%}"class="btn btn-outline-success">View</a>
+                {% comment %} <a href="{%url 'pause-printer' job.id%}"class="btn btn-outline-success">Pause</a> {% endcomment %}
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+  </table>
+
+  {%endblock%}

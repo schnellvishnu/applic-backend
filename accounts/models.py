@@ -38,3 +38,27 @@ class UserAuditHistoryOnly(models.Model):
     datefield=models.DateField(auto_now_add=True)                 
     def __str__(self):
         return self.donebyuser   
+    
+class UserrolePermissions(models.Model):
+    id=models.AutoField(primary_key=True)
+    activity_name=models.CharField(max_length=100)
+    admin=models.JSONField(default={'CREATE':'Checked', 'READ': 'Checked', 'UPDATE':'Checked', 'DELETE':'Checked'}) 
+    operator=models.JSONField(default={'CREATE':'Checked', 'READ': 'Checked', 'UPDATE':'Checked', 'DELETE':'Checked'}) 
+    masterdata=models.JSONField(default={'CREATE':'Checked', 'READ': 'Checked', 'UPDATE':'Checked', 'DELETE':'Checked'}) 
+    supervisor=models.JSONField(default={'CREATE':'Checked', 'READ': 'Checked', 'UPDATE':'Checked', 'DELETE':'Checked'})
+    def __str__(self):
+    	return self.activity_name     
+
+class History(models.Model):
+                      
+    modelname = models.CharField(max_length=100)
+    savedid = models.CharField(max_length=100)
+    operationdone = models.CharField(max_length=100)
+    donebyuser = models.CharField(max_length=100)
+    donebyuserrole = models.CharField(max_length=100)
+    donedatetime = models.DateTimeField(max_length=100)
+    description=models.CharField(max_length=300,default="True")
+    donebyemployeeid=models.CharField(max_length=100,null=True)
+    def __str__(self):
+        return self.donebyuser   
+    

@@ -225,6 +225,18 @@ class ScannerTable(models.Model):
                         gtin=models.CharField(max_length=100,null=True)
                         numbers=models.JSONField(null=True,blank=True)
                         ip_address=models.CharField(max_length=100,null=True)
-                        grade = models.JSONField(blank=True, default="[{\"serialnumber\":\"grade\"}]")
+                        grade = models.JSONField(blank=True,default="[{\"serialnumber\":\"grade\"}]")
+                        status=models.CharField(max_length=100,null=True)
                         def __str__(self):
-                                    return str(self. id)            
+                                    return str(self. id) 
+class ReworkTable(models.Model):
+                    id=models.AutoField(primary_key=True)
+                    # processordernumber=models.CharField(max_length=100,unique= True)
+                    gtin=models.CharField(max_length=100,null=True)
+                    slnonumber=models.CharField(max_length=100,null=True)
+                    
+                    oldstatus = models.CharField(max_length=100,null=True)
+                    newstatus=models.CharField(max_length=100,null=True)
+                    def __str__(self):
+                        return str(self. id)  
+             
