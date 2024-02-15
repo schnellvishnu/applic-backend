@@ -10,16 +10,49 @@
         rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
         crossorigin="anonymous"
-      />  
+      /> 
+       <script type="text/javascript"> 
+        window.history.forward(); 
+        function noBack() { 
+            window.history.forward();
+            
+
+        } 
+       
+    </script> 
+   
     </head>  
-    <body style="background-color:#bebebe ">  
-    
+    <body style="background-color:#bebebe" onkeydown="return (event.keyCode != 116)">  
+     
       <form method="POST" class="post-form" action="{{qs.id}}">  
         {% csrf_token %}
         <br/> <br/> <br/><br/><br/><br/>
-        <a href="{%url 'all-jobs' %}" class="btn btn-info" style= "color:black; margin-left:1400px" >Back To List Page</a>      
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+          <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </symbol>
+        </svg>
+        <div class="alert alert-info d-flex align-items-center" role="alert" style="width:50%; margin-left:450px">
+          <svg class="bi flex-shrink-0 me-2" style="height:50px;margin-left:-100px;" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+          <div style="margin-left:-100px;">
+            After Stopping The Batch Please Click Return SerialNumbers Button For Returning Balanced Serialnumbers
+          </div>
+        </div>
+        {% comment %} <div class="alert alert-primary"  role="alert" style="width:50%; margin-left:450px" >
+          After Batch Stop Please Click Return SerialNumbers button For Return Balanced Serialnumbers
+         </div>  {% endcomment %}
+         {% if errormess == "cartridge_expired (12)"  %}
+         <div class="alert alert-primary"  role="alert" style="width:50%; margin-left:450px" >
+         Printer Cartridge Expired
+         </div> 
+         {% endif %} 
+
+        {% if qs.return_slno_btn_response == 0 and  sd != 1 %}
+        <a href="{%url 'indexpage' %}" class="btn btn-info" style= "color:black; margin-left:1400px" >Back To List Page</a>      
+        {% endif %} 
         <div class="container text-center" style="border: 4px solid rgb(51, 74, 72); background-color:#dcdcdc">
           <div class="row">
+           
             <div classname="col-12">
               <h1 ><font face="times new roman" >Batch Details</font></h1>
               <br></br>
@@ -28,6 +61,7 @@
           <div class="row" style="margin-left:-110px">
             <br></br>
             <div class="col-3">  
+           
               <h5 style="margin-left:180px;">Lot</h5>
               <br/> <br/><br/>
               <h5 style=" margin-left:190px" >Serialno</h5>  
@@ -35,11 +69,11 @@
               <h5 style=" margin-left:200px" >Expiry Date</h5>  
             </div>
             <div class="col-3">
-              <input type="text" style="width:80%;height:50px"   name="eid" id="id_eid" required maxlength="50" value="{{ qs.lot }}"/> 
+              <input type="text" readOnly="true" style="width:80%;height:50px"   name="eid" id="id_eid" required maxlength="50" value="{{ qs.lot }}"/> 
               <br/><br/><br/>
-              <input type="text" style="width:80%;height:50px"  name="ename" id="id_ename" required maxlength="100" value="{{ qs.numbers }}" />
+              <input type="text" readOnly="true" style="width:80%;height:50px"  name="ename" id="id_ename" required maxlength="100" value="{{ qs.numbers }}" />
               <br/><br/><br/>
-              <input type="text"  style="width:80%;height:50px" name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.expiration_date}}" />   
+              <input type="text" readOnly="true"  style="width:80%;height:50px" name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.expiration_date}}" />   
             </div>
             <br></br>
             <div class="col-3">
@@ -50,26 +84,51 @@
               <h5 style="margin-left:-60px">Type</h5>   
             </div>
             <div class="col-3">
-              <input type="text" style="width:80%;height:50px"  name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.gtin}}" />  
+              <input  type="text"   readOnly="true" style="width:80%;height:50px"  name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.gtin}}" />  
               <br/><br/><br/>
-              <input type="text" style="width:80%;height:50px"   name="eemail" id="id_eemail" required maxlength="254" value="{{ qs.processordernumber }}" /> 
+              <input type="text" readOnly="true" style="width:80%;height:50px"   name="eemail" id="id_eemail" required maxlength="254" value="{{ qs.processordernumber }}" /> 
               <br/><br/><br/>
-              <input type="text" style="width:80%;height:50px"   name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.type }}" />  
+              <input type="text" readOnly="true" style="width:80%;height:50px"   name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.type }}" />  
+ 
             </div>
           </div> 
           <br></br>
           <div class="row">
             <div classname="col-12">
-              {% if sd == 1 %}
+              
+              {% if qs.responsefield == 1 or  sd == 1 %}
                 <button type="submit" class="btn btn-danger" >Stop Batch</button> &nbsp;&nbsp;&nbsp;
-              {% else %}
+              {% elif qs.responsefield == 0 %}
                 <button type="submit" class="btn btn-primary" >Load Batch</button> &nbsp;&nbsp;&nbsp;
-              {% endif %}  
-                <a href="{%url 'pause-printer' qs.id%}" style= "color:red" >Please Click Here To Start the Printing Activities</a>
+               
+              {% endif %}
+              {% comment %} {% if qs.stopbtnresponse == 0 or lp == 0%}
+              <a href="{%url 'pause-printer' qs.id%}" style= "color:red" >Please Click Here To Start the Printing Activities</a>
+              {% elif lp == 1 %}
+              <a href="{%url 'pause-printer' qs.id%}" style= "color:red;pointer-events: none;";"cursor: default"; >Please Click Here To Start the Printing Activities</a>
+              {% endif %} {% endcomment %}
               <br></br>
+             {% if sd == 1 %} 
+              <a href="{%url 'pause-printer' qs.id%}" style= "color:red" >Please Click Here To Start the Printing Activities</a>
+             
+
+            
+              {% endif %}
+              {% if qs.return_slno_btn_response == 0 and sd != 1 %}
+              <a href="{%url 'return-get' qs.id%}" class="btn btn-warning"  style= "color:black;margin-left:1000px;margin-top:-40px"; > Navigate To Return Serialnumbers</a> 
+              <br/>
+              {% endif %}
+              {% comment %} <a href="{%url 'serialnumberdownload' qs.id%}" class="btn btn-info" style= "color:red; margin-left:640px" >DownLoad Serialnumbers</a>  {% endcomment %}
+              
             </div>
           </div> 
-         
+          
       </form>  
-    </body>  
-  </html>  
+
+      
+      
+  </body>  
+  
+</html>  
+
+  

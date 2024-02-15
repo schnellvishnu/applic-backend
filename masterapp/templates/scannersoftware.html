@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+
+
+  <html lang="en">  
+    <head>  
+      <meta charset="UTF-8">  
+      <title>Index</title>  
+      {% load static %} 
+      <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+        crossorigin="anonymous"
+      /> 
+      <script type="text/javascript"> 
+        window.history.forward(); 
+        function noBack() { 
+            window.history.forward();
+              
+
+        } 
+       
+    </script>
+    </head>  
+    <body style="background-color:#bebebe"> 
+    
+    <form method="POST" class="post-form" action="{{qs.id}}">  
+                    {% csrf_token %}
+
+
+
+<div class="row">
+ 
+    <div class="col-4" >
+      <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+        <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </symbol>
+      </svg>
+      <div class="alert alert-info d-flex align-items-center" role="alert" style="width:100%; margin-left:540px;margin-top:200px;">
+        <svg class="bi flex-shrink-0 me-2" style="height:50px;margin-left:-100px;" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div style="margin-left:-100px;">
+          If You Want To Start The Process Click The View Button        
+        </div>
+      </div>
+      {% comment %} <div class="alert alert-info"  role="alert" style="width:100%; margin-left:540px;margin-top:200px;" >
+
+         If You Want To Start The Process Click The View Button             
+                                      
+    </div> {% endcomment %}
+    <div style="border: 4px solid rgb(51, 74, 72);margin-left:540px;width:100%;">
+      <br/>
+      <h4 style="margin-left:220px;width:100%;">Gtin : {{job.gtin }}</h4>
+      <br/>
+      <h4 style="margin-left:220px;width:100%;">Batch  : {{job.lot }}</h4>
+      <br/>
+    <a href="{%url 'emp-editjob' job.id%}" class="btn btn-success" style="margin-left:240px;width:20%;">View</a>
+                                       </div> 
+                                       <br/>
+          </div>  
+
+ <a href="{%url 'indexpage' %}" class="btn btn-info" style= "color:black; width:10%;height:40px; margin-left:340px;margin-top:500px" >Back To List Page</a>      
+</form>  
+</body>
+</html>    

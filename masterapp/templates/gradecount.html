@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+  <html lang="en">  
+    <head>  
+      <meta charset="UTF-8">  
+      <title>Index</title>  
+      {% load static %} 
+      <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+        crossorigin="anonymous"
+      /> 
+      <script type="text/javascript"> 
+                    window.setTimeout(function () {
+                      location.href = "{%url 'gradecount' qs.id  %}";
+                  }, 1000); // refresh/redirect after 5 seconds.
+                </script>
+   
+    </head>  
+    <body style="background-color:#bebebe" onkeydown="return (event.keyCode != 116)">  
+     
+      <form method="POST" class="post-form" action="{{qs.id}}">  
+        {% csrf_token %}
+        <br/> <br/> <br/><br/><br/><br/>
+      
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+          <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </symbol>
+        </svg>
+        {% if sc == 0 %}
+        <div class="alert alert-info d-flex align-items-center" role="alert" style="width:50%; margin-left:450px">
+          <svg class="bi flex-shrink-0 me-2" style="height:50px;margin-left:-100px;" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+          <div style="margin-left:-100px;">
+           Serialnumbers of This Batch Number Are Finished.Go  Back To  The Pause/Start Page For Pauseing  The Printer And After Click The Pause Button Navigate To the Batch Detail Page And Click To The  Stop Button For Stop The Process.
+          </div>
+        </div>
+        {% endif %}
+        <div style="margin-left:750px">
+        <h4>SerialNumber Count : {{ sc }}</h4>
+        </div>
+
+        
+        <div class="container text-center" style="border: 4px solid rgb(51, 74, 72); background-color:#dcdcdc">
+          <div class="row">
+           <div>
+            <br/>
+           </div>
+            
+          <div class="row" style="margin-left:110px">
+            <br></br>
+            <div class="col-3">  
+           
+              <h5 style="margin-left:180px;">Grade</h5>
+              <br/> <br/><br/>
+             
+            </div>
+            <div class="col-3">
+              <input type="text" style="width:140%;height:50px"   name="eid" id="id_eid" required maxlength="50" value="{{ qs.scannergradefield }}"/> 
+              <br/><br/><br/>
+            
+            </div>
+            <br></br>
+          
+            
+          </div> 
+          <br></br>
+       
+       <a href="javascript:window.history.back();" class="btn btn-primary" style="width:20%; margin-left:500px;">Back To Pause/Start Page</a> 
+           
+          
+      </form>  
+
+      
+      
+  </body>  
+  
+</html>  
+
+  

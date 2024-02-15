@@ -213,8 +213,14 @@ class PrinterdataTable(models.Model):
         start_pause_btnresponse=models.BooleanField(null=True)
         pause_stop_btnresponse=models.BooleanField(null=True)
         return_slno_btn_response=models.BooleanField(null=True)
+        
+        label_response=models.CharField(max_length=100,null=True)
+        child_numbers=models.JSONField(null=True,blank=True)
+        scannergradefield=models.JSONField(null=True,blank=True)
+        
         def __str__(self):
                 return str(self. id)
+            
             
             
             
@@ -239,4 +245,8 @@ class ReworkTable(models.Model):
                     newstatus=models.CharField(max_length=100,null=True)
                     def __str__(self):
                         return str(self. id)  
+             
+             
+             
+             
              

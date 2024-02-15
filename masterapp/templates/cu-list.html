@@ -10,28 +10,47 @@
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
     />  
+    <script type="text/javascript"> 
+      window.history.forward(); 
+      function noBack() { 
+          window.history.forward();
+          style="pointer-events: none;";"cursor: default"
+
+      } 
+  </script>
   </head> 
   
   <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="white" >
     <div class="container-fluid">
       <a class="navbar-brand" href="#" style="color:white">Track And Trace</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
+      
+      <a class="btn btn-outline-danger" style="margin-left:100px;margin-top:20px" href="{%url 'signout'%}">Logout</a>
+     
+      
+     
+    {% comment %} <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
           <a class="nav-link" href="#">Features</a>
           <a class="nav-link" href="#">Pricing</a>
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </div>
       </div>
+    </div> {% endcomment %}
+   
     </div>
+    <form action="{%url 'search'  %}" method="get" class="d-flex" style= "margin-left:1230px;margin-top:-30px"; >       
+      <input class="form-control me-2" type="text" name="query" placeholder="Enter Gtin" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button></div> 
+ 
+   </form>
   </nav>
   <br/>
-  
-  <table class="table table-dark" style="height:400px">
-
+  {% if search == 1 %}
+          <a href="{%url 'indexpage' %}" class="btn btn-info" style= "color:black; margin-left:1400px" >Back To List Page</a>   
+        
+            
+          {% endif %} 
+  <table class="table table-dark" style="height:600px">
     <thead>
       <tr>
         <tr>
@@ -45,22 +64,74 @@
         </tr>
       </tr>
     </thead>
-    {%for job in jobs%}
+    {% for job in page_obj %}
     <tbody>
-        <tr>
-            <td>{{job.id}}</td>
-            <td>{{job.gtin}}</td>
-            <td>{{job.lot}}</td>
-            <td>{{job.expiration_date}}</td>
-            <td>{{job.type}}</td>
-            <td>{{job.status}}</td>
-            <td>
-                <a href="{%url 'emp-editjob' job.id%}"class="btn btn-outline-success">View</a>
-                {% comment %} <a href="{%url 'pause-printer' job.id%}"class="btn btn-outline-success">Pause</a> {% endcomment %}
-            </td>
-        </tr>
-        {%endfor%}
+      <tr>
+        <td>{{job.id}}</td>
+        <td>{{job.gtin}}</td>
+        <td>{{job.lot}}</td>
+        <td>{{job.expiration_date}}</td>
+        <td>{{job.type}}</td>
+        <td>{{job.status}}</td>
+        <td>
+          {% if job.status == "Printed" %}
+          
+              <a href="{%url 'autovision' job.id%}" class="btn btn-danger" data-role="disabled" style="pointer-events: none;";"cursor: default" ;>Closed</a> 
+         {% comment %} {% elif job.preparebuttonresponse == 1  %}
+              <a href="{%url 'emp-editjob' job.id%}" class="btn btn-success">View</a>  {% endcomment %}
+           {% else %}   
+            <a href="{%url 'autovision' job.id%}" class="btn btn-success">Check/Run Autovision</a> 
+
+         
+          {% endif %}  
+
+          
+          
+
+          {% comment %} {% if job.status == "Not Print" %}
+            <a href="{%url 'autovision' job.id%}" class="btn btn-success">Check/Run Autovision</a>
+         
+          {% else %}  
+              <a href="{%url 'autovision'  job.id%}" class="btn btn-success" data-role="disabled" style="pointer-events: none;";"cursor: default" ;>Check/Run Autovision</a>    
+          {% endif %}   {% endcomment %}
+          {% comment %} {% else %}  
+            <a href="{%url 'autovision'  job.id%}" class="btn btn-success" data-role="disabled" style="pointer-events: none;";"cursor: default" ;>Check/Run Autovision</a>  {% endcomment %}
+   
+            
+       
+        
+        </td>
+        {% comment %} <td>
+          <a href="{%url 'indexpage' %}" class="btn btn-info" style= "color:black; margin-left:1400px" >Back To List Page</a>   
+        </td> {% endcomment %}
+
+      </tr>
+        {% endfor %}
     </tbody>
   </table>
+  <center>
+    {% comment %} {% if page_obj.has_previous %} {# whether the previous page exists #}
+    <a href="{%url 'indexpage' %}?page={{page_obj.previous_page_number}}">PreviousPage</a> {# link to the prev page #}
+    {% endif %}
+    <span>{{page_obj.number}}</span> {# the current page number #}
+    
+    {% if page_obj.has_next %} {# whether the next page exists #}
+    <a href="{%url 'indexpage' %}?page={{page_obj.next_page_number}}">NextPage</a> {# link to the next page #}
+    {% endif %} {% endcomment %}
 
-  {%endblock%}
+
+
+    <nav aria-label="Page navigation example" style="margin-left:800px;">
+      <ul class="pagination" >
+        {% if page_obj.has_previous %} 
+        <li class="page-item"><a class="page-link" style="color:red;" href="{%url 'indexpage' %}?page={{page_obj.previous_page_number}}">Previous Page</a></li> 
+         {% endif %}
+        <li class="page-item"><a class="page-link" style="color:red;" href="#">{{page_obj.number}}</a></li>
+        {% if page_obj.has_next %} 
+       <li class="page-item"><a class="page-link" style="color:red;" href="{%url 'indexpage' %}?page={{page_obj.next_page_number}}">Next Page</a></li>
+       {% endif %}
+      </ul>
+    </nav>
+</center>
+
+  {% endblock %}

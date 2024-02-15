@@ -37,4 +37,7 @@ class CustomerForm(forms.ModelForm):
 
 class Dummyform(forms.Form):
     ex=forms.CharField()                     
-       
+
+class Loginform(forms.Form):
+    username=forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter UserName', 'style': 'width: 300px; height:60px;margin-left:15px;'}))
+    password=forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter Password', 'style': 'width: 300px;height:60px;margin-left:20px;'}))       

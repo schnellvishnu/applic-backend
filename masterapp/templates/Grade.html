@@ -1,0 +1,89 @@
+{%block body_block%}
+<head>  
+    <meta charset="UTF-8">  
+    <title>Index</title>  
+    {% load static %} 
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />  
+    <script type="text/javascript"> 
+      window.setTimeout(function () {
+        location.href = "{%url 'grade'  %}";
+    }, 1000); // refresh/redirect after 5 seconds.
+  </script>
+  </head> 
+  
+  <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="white" >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" style="color:white">Track And Trace</a>
+    
+      <form action="{%url 'search'  %}" method="get" class="d-flex">       
+        <input class="form-control me-2" type="text" name="query" placeholder="Enter Gtin" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button></div> 
+     </form>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+      </div>
+    </div>
+    </div>
+  </nav>
+  <br/>
+  
+  <table class="table table-dark" style="height:600px">
+    <thead>
+      <tr>
+        <tr>
+            <th>id</th>
+            <th>Grade</th>
+            <th>Not detecte</th>
+           
+        </tr>
+      </tr>
+    </thead>
+    {% for job in page_obj %}
+    <tbody>
+      <tr>
+        <td>{{job.id}}</td>
+        <td>{{job.grade}}</td>
+        <td>{{job.numbers}}</td>
+        
+       
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  <center>
+    {% comment %} {% if page_obj.has_previous %} {# whether the previous page exists #}
+    <a href="{%url 'indexpage' %}?page={{page_obj.previous_page_number}}">PreviousPage</a> {# link to the prev page #}
+    {% endif %}
+    <span>{{page_obj.number}}</span> {# the current page number #}
+    
+    {% if page_obj.has_next %} {# whether the next page exists #}
+    <a href="{%url 'indexpage' %}?page={{page_obj.next_page_number}}">NextPage</a> {# link to the next page #}
+    {% endif %} {% endcomment %}
+
+
+
+    <nav aria-label="Page navigation example" style="margin-left:800px;">
+      <ul class="pagination" >
+        {% if page_obj.has_previous %} 
+        <li class="page-item"><a class="page-link" style="color:red;" href="{%url 'grade' %}?page={{page_obj.previous_page_number}}">Previous Page</a></li> 
+         {% endif %}
+        <li class="page-item"><a class="page-link" style="color:red;" href="#">{{page_obj.number}}</a></li>
+        {% if page_obj.has_next %} 
+       <li class="page-item"><a class="page-link" style="color:red;" href="{%url 'grade' %}?page={{page_obj.next_page_number}}">Next Page</a></li>
+       {% endif %}
+      </ul>
+    </nav>
+       <a href="javascript:window.history.back();" class="btn btn-primary">Back To Details Page</a> 
+</center>
+
+  {% endblock %}
